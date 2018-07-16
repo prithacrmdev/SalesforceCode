@@ -1,0 +1,24 @@
+//test class to ensure coverage for the trigger written
+@isTest
+public class TestNumberofContacts {
+    static testMethod void TestNumberofCons(){
+        //creating an account
+        Account Acc = new Account(Name='TestAccount');      
+        insert Acc;
+        //System.debug(Acc);
+        Contact testcon1 = new Contact(LastName='Testcon1',AccountId=Acc.Id);
+        Contact testcon2 = new Contact(LastName='Testcon2',AccountId=Acc.Id);
+        Contact testcon3 = new Contact(LastName='Testcon3',AccountId=Acc.Id);
+        
+        Test.startTest();
+        	//creating and deleting contacts
+            insert testcon1;
+        	System.debug(testcon1);
+            insert testcon2;
+            System.debug(testcon2);
+            Insert testcon3;
+        	System.debug(testcon3);
+            delete testcon1;
+        Test.StopTest();      
+    }
+}

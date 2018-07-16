@@ -1,0 +1,7 @@
+public class MyHTTPCalloutTest {
+	void MyHTTPCallout() {
+		HttpResponse res = new HttpHelper().MakeCall('https://postman-echo.com/get?foo1=bar1&foo2=bar2', 'GET');
+		Object results = JSON.deserializeUntyped(res.getBody());
+		System.debug(results); //This shows the result
+     }
+}

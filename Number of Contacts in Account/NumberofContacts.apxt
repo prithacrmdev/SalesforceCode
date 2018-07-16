@@ -1,0 +1,28 @@
+//trigger when the contacts are inserted,updated or deleted from accounts
+trigger NumberofContacts on Contact (after insert, after update, after delete) {
+//Creating a set to get a list of unique account Id's
+Set <Id> accountIds = new Set <Id>();
+//Initialising a list of accounts
+List <Account> AccountsToUpdate = new List <Account>();
+//Checking for insert trigger
+ if(Trigger.isInsert){
+    for(Contact con:trigger.new){
+        accountIds.add(con.accountID);
+    }
+}
+//Checking for update trigger
+if(Trigger.isUpdate|| Trigger.isDelete){
+    for(Contact con:trigger.old){
+        accountIds.add(con.accountID);
+    }
+}
+//looping on Account object
+for(Account acc:[SELECT Id,Name,Number_of_Contacts__c,(Select Id from Contacts) from Account where Id IN: accountIds]){
+    Account accObj = new Account ();
+    accObj.Id = acc.Id;
+    accObj.Number_of_Contacts__c = acc.Contacts.size();
+    AccountsToUpdate.add(accObj);
+}
+//updating the list of accounts
+UPDATE AccountsToUpdate;
+}

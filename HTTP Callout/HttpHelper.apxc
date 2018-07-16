@@ -1,0 +1,11 @@
+public class HttpHelper {
+    public HttpResponse MakeCall(String uri, String method) {
+		HttpRequest req = new HttpRequest();
+		req.setEndpoint(uri);
+		req.setMethod(method);
+		Http h = new Http();
+		HttpResponse res = h.send(req);
+		System.debug(res);
+		return res;
+	}
+}

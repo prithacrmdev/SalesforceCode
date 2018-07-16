@@ -1,0 +1,3 @@
+//For running it use in execute anonymous window
+
+new MyHTTPCalloutTest().MyHTTPCallout();
